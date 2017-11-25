@@ -29,6 +29,12 @@ public class Produto {
         this.descricao = descricao;
     }
 
+    public Produto(int id, String descricao, double preco) {
+        this.id = id;
+        this.descricao = descricao;
+        this.preco = preco;
+    }
+
     public int getId() {
         return id;
     }

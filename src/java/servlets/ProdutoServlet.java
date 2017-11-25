@@ -5,20 +5,32 @@
  */
 package servlets;
 
+import daos.produto.ProdutoDao;
+import daos.produto.ProdutoDaoImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.Produto;
 
 /**
  *
  * @author felip
  */
-@WebServlet(name = "ProdutosServlet", urlPatterns = {"/ProdutosServlet"})
-public class ProdutosServlet extends HttpServlet {
+@WebServlet(name = "ProdutoServlet", urlPatterns = {"/ProdutoServlet"})
+public class ProdutoServlet extends HttpServlet {
+
+    public ProdutoDao produtoDao;
+
+    public Produto produto;
+
+    public ProdutoServlet() {
+        produtoDao = new ProdutoDaoImpl();
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,21 +41,25 @@ public class ProdutosServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processSaveRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ProdutosServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ProdutosServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        int id = Integer.parseInt(request.getParameter("id"));
+        String descricao = request.getParameter("descricao");
+        double preco = Double.parseDouble(request.getParameter("preco"));
+
+        produto = new Produto(id, descricao, preco);
+
+        if (id != 0) {
+            produtoDao.atualizar(produto);
+        } else {
+            produtoDao.criar(produto);
         }
+        redirectProducts(request, response);
+    }
+
+    protected void processListRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        redirectProducts(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,7 +74,7 @@ public class ProdutosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        processListRequest(request, response);
     }
 
     /**
@@ -72,7 +88,11 @@ public class ProdutosServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String action = request.getParameter("action");
+        if (action.equals("salvar")) {
+            processSaveRequest(request, response);
+        }
+        processSaveRequest(request, response);
     }
 
     /**
@@ -84,5 +104,13 @@ public class ProdutosServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void redirectProducts(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Produto> produtos = produtoDao.listar();
+        request.setAttribute("produtos", produtos);
+        request.getRequestDispatcher("/produtos.jsp").forward(request,
+                response);
+    }
 
 }
