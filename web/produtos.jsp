@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,20 +19,24 @@
 
         <table>
             <thead>
-                 <tr>
-                     <td>#</td>
+                <tr>
+                    <td>#</td>
                     <td>Descrição</td>
                     <td>Preço</td>
                     <td></td>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Test</td>
-                    <td>2,50</td>
-                    <td><a href="">Remover</a></td>
-                </tr>
+                <c:forEach var="produto" items="${produtos}" varStatus="inf">
+                    <tr>
+                        <td>${param.s + inf.count}</td>
+                        <td>${produto.descricao}</td>
+                        <td>${produto.preco}</td>
+                        <td><a href="ProdutoServlet?action=remover&id=${produto.id}">Remover</a>
+                            <a href="ProdutoServlet?action=editar&id=${produto.id}">Editar</a>
+                        </td>
+                    </tr>
+                </c:forEach>
             </tbody>
         </table>
     </body>
