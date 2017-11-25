@@ -34,7 +34,7 @@
                         <td>${inf.count}</td>
                         <td>${produto.descricao}</td>
                         <td>${produto.preco}</td>
-                        <td><a href="ProdutoServlet?action=remover&id=${produto.id}">Remover</a>
+                        <td><a href="ProdutoServlet?action=remover&id=${produto.id}" onclick="return confirm('Deseja remover esse produto?');">Remover</a>
                             <a href="ProdutoServlet?action=editar&id=${produto.id}">Editar</a>
                         </td>
                     </tr>
