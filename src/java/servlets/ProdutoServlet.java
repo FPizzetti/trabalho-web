@@ -70,9 +70,13 @@ public class ProdutoServlet extends HttpServlet {
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Produto p = produtoDao.consultarPorId(id);
-        request.setAttribute("produto", p);
-        request.getRequestDispatcher("/produto-form.jsp").forward(request,
-                response);
+        if (p != null) {
+            request.setAttribute("produto", p);
+            request.getRequestDispatcher("/produto-form.jsp").forward(request,
+                    response);
+        } else {
+            redirectProducts(request, response);
+        }
     }
 
     protected void processRemoveRequest(HttpServletRequest request, HttpServletResponse response)
