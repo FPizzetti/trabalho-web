@@ -5,18 +5,22 @@
  */
 package servlets;
 
+import daos.pedido.PedidoDao;
+import daos.pedido.PedidoDaoImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.Pedido;
 
 /**
  *
- * @author qwerty
+ * @author Matheus
  */
 @WebServlet(name = "PedidoServlet", urlPatterns = {"/PedidoServlet"})
 public class PedidoServlet extends HttpServlet {
@@ -35,16 +39,19 @@ public class PedidoServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-
+            PedidoDao pedidoDao = new PedidoDaoImpl();
+            Pedido pedido = new Pedido();
+            
             String acao = request.getParameter("acao");
 
             if (acao == null) {
+                List<Pedido> pedidos = pedidoDao.listarPedidos();
                 
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/pedidos.jsp");
+                request.setAttribute("pedidos", pedidos);
+                
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
                 rd.forward(request, response);
             }
-            
-
         }
     }
 
