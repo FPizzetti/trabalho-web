@@ -19,9 +19,9 @@
         </h3>
         <form method="POST" action="ProdutoServlet?action=salvar">
             <label>Descrição</label><br/> 
-            <input name="descricao" value="${produto.descricao}" /><br/>
+            <input required name="descricao" value="${produto.descricao}" /><br/>
             <label>Preço</label>  <br/>
-            <input type="number" name="preco" value="${produto.preco}" /><br/>
+            <input required type="number" name="preco" value="${produto.preco}" /><br/>
             <input name="id" type="hidden" value="${produto.id}" /><br/>
             <button type="submit">Salvar</button>
         </form>
