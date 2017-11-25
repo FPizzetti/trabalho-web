@@ -1,9 +1,3 @@
-<%-- 
-    Document   : pedidos
-    Created on : 25/11/2017, 14:04:18
-    Author     : qwerty
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -13,6 +7,9 @@
         <title>JSP Page</title>
     </head>
     <body>
+        
+        <h1>Pedidos</h1>
+        
         <table>
             <thead>
                 <tr>

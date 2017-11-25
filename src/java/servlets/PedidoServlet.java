@@ -45,11 +45,11 @@ public class PedidoServlet extends HttpServlet {
             String acao = request.getParameter("acao");
 
             if (acao == null) {
-                List<Pedido> pedidos = pedidoDao.listarPedidos();
+                List<Pedido> pedidos = pedidoDao.listarPedidos("");
                 
                 request.setAttribute("pedidos", pedidos);
                 
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/pedidos.jsp");
                 rd.forward(request, response);
             }
         }
