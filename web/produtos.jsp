@@ -17,6 +17,8 @@
 
         <a href="produto-form.jsp">Novo Produto</a>
 
+        <h4 style="color:red">${erro}</h4>
+
         <table>
             <thead>
                 <tr>
@@ -29,7 +31,7 @@
             <tbody>
                 <c:forEach var="produto" items="${produtos}" varStatus="inf">
                     <tr>
-                        <td>${param.s + inf.count}</td>
+                        <td>${inf.count}</td>
                         <td>${produto.descricao}</td>
                         <td>${produto.preco}</td>
                         <td><a href="ProdutoServlet?action=remover&id=${produto.id}">Remover</a>

@@ -83,8 +83,13 @@ public class ProdutoServlet extends HttpServlet {
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         if (id > 0) {
-            produtoDao.removerPorId(id);
-            redirectProducts(request, response);
+            try {
+                produtoDao.removerPorId(id);
+                redirectProducts(request, response);
+            } catch (Exception e) {
+                request.setAttribute("erro", "Não foi possível remover este produto");
+                redirectProducts(request, response);
+            }
         }
     }
 
