@@ -68,8 +68,11 @@ public class ProdutoServlet extends HttpServlet {
 
     protected void processEditRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-       
+        int id = Integer.parseInt(request.getParameter("id"));
+        Produto p = produtoDao.consultarPorId(id);
+        request.setAttribute("produto", p);
+        request.getRequestDispatcher("/produto-form.jsp").forward(request,
+                response);
     }
 
     protected void processRemoveRequest(HttpServletRequest request, HttpServletResponse response)
