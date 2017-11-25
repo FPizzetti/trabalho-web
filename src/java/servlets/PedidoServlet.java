@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.ItemPedido;
 import models.Pedido;
 
 /**
@@ -45,12 +46,35 @@ public class PedidoServlet extends HttpServlet {
             String acao = request.getParameter("acao");
 
             if (acao == null) {
+                
                 List<Pedido> pedidos = pedidoDao.listarPedidos("");
                 
                 request.setAttribute("pedidos", pedidos);
                 
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/pedidos.jsp");
                 rd.forward(request, response);
+            }
+            else if (acao.equals("visualizar")) {
+                
+                int id = Integer.parseInt(request.getParameter("id"));
+                
+                float total = 0;
+                
+                List<ItemPedido> itens = pedidoDao.listarItens(id);
+                
+                for (ItemPedido element : itens) {
+                    total += element.getProduto().getPreco() * element.getQuantidade();
+                }
+
+                request.setAttribute("itens", itens);
+                request.setAttribute("total", total);
+                
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/pedido-detalhes.jsp");
+                rd.forward(request, response);
+            } 
+            else if (acao.equals("novo")) {
+                
+                
             }
         }
     }

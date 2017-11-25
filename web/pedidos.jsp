@@ -4,11 +4,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Pedidos</title>
     </head>
     <body>
         
         <h1>Pedidos</h1>
+        <p><a href="PedidoServlet?acao=novo">+ Novo pedido</a></p>
         
         <table>
             <thead>
@@ -16,6 +17,7 @@
                     <td>ID</td>
                     <td>Data</td>
                     <td>Cliente</td>
+                    <td>&nbsp;</td>
                 </tr>
             </thead>
             <tbody>
@@ -23,7 +25,8 @@
                 <tr>
                     <td>${pedido.id}</td>
                     <td>${pedido.data}</td>
-                    <td>${pedido.cliente.cpf}</td>
+                    <td>${pedido.cliente.nome}</td>
+                    <td><a href="PedidoServlet?acao=visualizar&id=${pedido.id}">Ver detalhes</a></td>
                 </tr>
                 </c:forEach>
             </tbody>
