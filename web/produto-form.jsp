@@ -12,12 +12,12 @@
         <title>Produto</title>
     </head>
     <body>
-        <form method="POST" action="/ProdutoServlet?action=salvar">
-            <input name="id" type="hidden" value="" /><br/>
+        <form method="POST" action="ProdutoServlet?action=salvar">
+            <input name="id" type="hidden" value="${produto.id}" /><br/>
             <label>Descrição</label><br/> 
-            <input name="descricao" value="" /><br/>
+            <input name="descricao" value="${produto.descricao}" /><br/>
             <label>Preço</label>  <br/>
-            <input type="number" name="preco" value="" /><br/>
+            <input type="number" name="preco" value="${produto.preco}" /><br/>
             <br/>
             <button type="submit">Salvar</button>
         </form>

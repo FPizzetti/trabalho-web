@@ -8,7 +8,6 @@ package servlets;
 import daos.produto.ProdutoDao;
 import daos.produto.ProdutoDaoImpl;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,7 +42,12 @@ public class ProdutoServlet extends HttpServlet {
      */
     protected void processSaveRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        int id = 0;
+        try {
+            id = Integer.parseInt(request.getParameter("id"));
+        } catch (NumberFormatException e) {
+            id = 0;
+        }
         String descricao = request.getParameter("descricao");
         double preco = Double.parseDouble(request.getParameter("preco"));
 
@@ -59,8 +63,22 @@ public class ProdutoServlet extends HttpServlet {
 
     protected void processListRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("");
         redirectProducts(request, response);
+    }
+
+    protected void processEditRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String id = request.getParameter("id");
+       
+    }
+
+    protected void processRemoveRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        if (id > 0) {
+            produtoDao.removerPorId(id);
+            redirectProducts(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -75,7 +93,14 @@ public class ProdutoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processListRequest(request, response);
+        String action = request.getParameter("action");
+        if (action != null && action.equals("remover")) {
+            processRemoveRequest(request, response);
+        } else if (action != null && action.equals("editar")) {
+            processEditRequest(request, response);
+        } else {
+            processListRequest(request, response);
+        }
     }
 
     /**
