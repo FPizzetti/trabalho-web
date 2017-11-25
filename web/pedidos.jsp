@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,11 +22,13 @@
                 </tr>
             </thead>
             <tbody>
+                <c:forEach var="pedido" items="${pedidos}" varStatus="inf">
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>${pedido.id}</td>
+                    <td>${pedido.data}</td>
+                    <td>${pedido.cliente.cpf}</td>
                 </tr>
+                </c:forEach>
             </tbody>
         </table>
     </body>
