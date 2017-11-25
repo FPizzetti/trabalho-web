@@ -8,6 +8,6 @@ public class ConnectionFactory {
 
     public static Connection getConnection() throws SQLException {
         //return DriverManager.getConnection("jdbc:mysql://localhost:3306/trabalho_final", "root", "pavilion");
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/trabalho_final", "root", "mysql");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/trabalho_final", "root", "root");
     }
 }

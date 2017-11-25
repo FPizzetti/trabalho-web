@@ -59,6 +59,7 @@ public class ProdutoServlet extends HttpServlet {
 
     protected void processListRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String action = request.getParameter("");
         redirectProducts(request, response);
     }
 
@@ -92,7 +93,6 @@ public class ProdutoServlet extends HttpServlet {
         if (action.equals("salvar")) {
             processSaveRequest(request, response);
         }
-        processSaveRequest(request, response);
     }
 
     /**
