@@ -15,7 +15,7 @@ public class ConnectionFactory {
             Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
 //        return DriverManager.getConnection("jdbc:mysql://localhost:3306/trabalho_final", "root", "pavilion");
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/trabalho_final", "root", "root");
-//        return DriverManager.getConnection("jdbc:mysql://localhost:3306/trabalho_final", "root", "mysql");
+//        return DriverManager.getConnection("jdbc:mysql://localhost:3306/trabalho_final", "root", "root");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/trabalho_final", "root", "mysql");
     }
 }

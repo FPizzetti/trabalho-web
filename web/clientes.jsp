@@ -10,28 +10,38 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista de Clientes</title>
+        <title>Clientes</title>
     </head>
     <body>
-        <h1>Lista de Clientes</h1>
-        <br>
-        <a href="ClienteServlet?acao=novo">Novo Cliente</a>
-        <br>
+        <h1>Clientes</h1>
+
+        <a href="cliente-form.jsp">Novo Cliente</a>
+
+        <h4 style="color:red">${erro}</h4>
+
         <table>
-            <tr>
-                <td>
-                    ID
-                </td>
-                <td>
-                    Nome
-                </td>
-                <td>
-                    Sobrenome
-                </td>
-                <td>
-                    CPF
-                </td>
-            </tr>
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <td>CPF</td>
+                    <td>Nome</td>
+                    <td>Sobrenome</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="cliente" items="${clientes}" varStatus="inf">
+                    <tr>
+                        <td>${inf.count}</td>
+                        <td>${cliente.cpf}</td>
+                        <td>${cliente.nome}</td>
+                        <td>${cliente.sobrenome}</td>
+                        <td><a href="#" onclick="return confirm('Deseja remover esse cliente?');">Remover</a>
+                            <a href="#">Editar</a>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
         </table>
     </body>
 </html>

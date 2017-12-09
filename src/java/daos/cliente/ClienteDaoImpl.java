@@ -41,7 +41,7 @@ public class ClienteDaoImpl implements ClienteDao {
             stmt.executeUpdate();
             p.setId(getId(stmt));
         } catch (SQLException ex) {
-            throw new RuntimeException("Erro ao inserir um produto no banco de dados. Origem=" + ex.getMessage());
+            throw new RuntimeException("Erro ao inserir um cliente no banco de dados. Origem=" + ex.getMessage());
         } finally {
             try {
                 stmt.close();
