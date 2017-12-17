@@ -36,8 +36,8 @@
                         <td>${cliente.cpf}</td>
                         <td>${cliente.nome}</td>
                         <td>${cliente.sobrenome}</td>
-                        <td><a href="#" onclick="return confirm('Deseja remover esse cliente?');">Remover</a>
-                            <a href="#">Editar</a>
+                        <td><a href="ClienteServlet?acao=remover&cpf=${cliente.cpf}" onclick="return confirm('Deseja remover esse cliente?');">Remover</a>
+                            <a href="ClienteServlet?acao=editar&id=${cliente.id}">Editar</a>
                         </td>
                     </tr>
                 </c:forEach>

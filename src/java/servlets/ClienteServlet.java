@@ -59,6 +59,27 @@ public class ClienteServlet extends HttpServlet {
                 }
                 redirectClientes(request, response);
             }
+            else if (acao.equals("remover")){
+                String cpf = request.getParameter("cpf");
+                
+                try {
+                    clienteDao.removerPorCpf(cpf);
+                    redirectClientes(request, response);
+                } catch (Exception e) {
+                    request.setAttribute("erro", "Não foi possível remover este cliente");
+                    redirectClientes(request, response);
+                }
+            }
+            else if (acao.equals("editar")){
+                int id = Integer.parseInt(request.getParameter("id"));
+                cliente = clienteDao.consultarPorId(id);
+                if (cliente != null) {
+                    request.setAttribute("cliente", cliente);
+                    request.getRequestDispatcher("/cliente-form.jsp").forward(request, response);
+                } else {
+                    redirectClientes(request, response);
+                }
+            }
             
         }
     }
