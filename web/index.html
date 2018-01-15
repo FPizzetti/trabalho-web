@@ -18,22 +18,41 @@ and open the template in the editor.
     
     </head>
     <body>
-        <table>
-            <tr>
-                <td>
-                    <a href="ClienteServlet">Clientes</a>
-                </td>    
-            </tr>
-            <tr>
-                <td>
-                    <a href="ProdutoServlet">Produtos</a>
-                </td>    
-            </tr>
-            <tr>
-                <td>
-                    <a href="PedidoServlet">Pedidos</a>
-                </td>    
-            </tr>
-        </table>
+        
+    <div class="container">
+        <div class="row" style="position: absolute; top: 20%; margin: 0 auto;">
+            <div class="col-xs-4">
+                <div class="card" style="width: 20rem; border: 1px solid gray; padding: 5px; text-align: center; margin: 10px;">
+                    <img class="card-img-top" src="https://cdn4.iconfinder.com/data/icons/advertising-media-1/64/Advertising__Media_Icons-19-512.png" style="width: 15rem; height: 15rem; margin: 5px auto;">
+                    <div class="card-block">
+                        <h4 class="card-title" style="font-weight: bold">Clientes</h4>
+                        <p class="card-text">Faça a gestão de seus clientes aqui.</p>
+                        <a href="ClienteServlet" class="btn btn-primary">Clientes</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="card" style="width: 20rem; border: 1px solid gray; padding: 5px; text-align: center; margin: 10px;">
+                    <img class="card-img-top" src="https://cdn4.iconfinder.com/data/icons/shopping-symbol-2/500/archive_box_file_open_open_box_pack_product_products-512.png" style="width: 15rem; height: 15rem; margin: 5px auto;">
+                    <div class="card-block">
+                        <h4 class="card-title" style="font-weight: bold">Produtos</h4>
+                        <p class="card-text">Faça a gestão de seus produtos aqui.</p>
+                        <a href="ProdutoServlet" class="btn btn-primary">Produtos</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="card" style="width: 20rem; border: 1px solid gray; padding: 5px; text-align: center; margin: 10px;">
+                    <img class="card-img-top" src="http://www.iconarchive.com/download/i88080/icons8/ios7/Finance-Purchase-Order.ico" alt="Card image cap" style="width: 15rem; height: 15rem; margin: 5px auto;">
+                    <div class="card-block">
+                        <h4 class="card-title" style="font-weight: bold">Pedidos</h4>
+                        <p class="card-text">Faça a gestão de seus pedidos aqui.</p>
+                        <a href="PedidoServlet" class="btn btn-primary">Pedidos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+       
     </body>
 </html>
