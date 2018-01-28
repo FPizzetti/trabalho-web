@@ -27,16 +27,16 @@
             
             <div class="row">
                 <div class="col-sm-3" style="text-align: left">
-                    <a href="index.html" class="btn btn-sm btn-outline-primary">
-                        Voltar
+                    <a href="index.html" class="btn btn-sm btn-outline-primary" style="border-radius: 0">
+                        <span class="fa fa-arrow-left"></span>
                     </a>
                 </div>
                 <div class="col-sm-6" style="text-align: center">
-                    <h1>Clientes</h1>
+                    <h1>Gerenciar Clientes</h1>
                 </div>
                 <div class="col-sm-3" style="text-align: right">
-                    <a href="cliente-form.jsp" class="btn btn-primary">
-                        <span class="fa fa-plus"></span>  Novo Cliente
+                    <a href="cliente-form.jsp" class="btn btn-success" style="border-radius: 0">
+                        Novo Cliente
                     </a>
                 </div>
             </div>
@@ -46,12 +46,12 @@
             <br>
 
             <table class="table">
-                <thead style="font-weight: bold">
+                <thead style="font-weight: bold; background-color: black; color: white;">
                     <tr>
                         <th>#</th>
-                        <td>CPF</td>
                         <td>Nome</td>
                         <td>Sobrenome</td>
+                        <td>CPF</td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -61,25 +61,24 @@
                     <c:forEach var="cliente" items="${clientes}" varStatus="inf">
                         <tr>
                             <th scope="row">${inf.count}</th>
-                            <td>${cliente.cpf}</td>
                             <td>${cliente.nome}</td>
                             <td>${cliente.sobrenome}</td>
+                            <td>${cliente.cpf}</td>
+
                             <td>
-                                <a href="ClienteServlet?acao=editar&id=${cliente.id}"
-                                   class="btn btn-outline-success fa fa-pencil">
+                                <a href="ClienteServlet?acao=editar&id=${cliente.id}">
+                                    Editar
                                 </a>
                             </td>
                             <td>
                                 <a href="ClienteServlet?acao=remover&cpf=${cliente.cpf}" 
-                                   onclick="return confirm('Deseja remover esse cliente?');"
-                                   class="btn btn-outline-danger fa fa-trash">
+                                   onclick="return confirm('Deseja remover esse cliente?');">
+                                    Excluir
                                 </a>
                             </td>
                         </tr>
                     </c:forEach>
                         
-                    <c:if test="${clientes.size() == 0}">Não há nenhum cliente cadastrado ainda!<br></c:if>
-
                 </tbody>
             </table>
         </div>

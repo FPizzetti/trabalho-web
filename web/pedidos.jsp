@@ -20,16 +20,16 @@
             
             <div class="row">
                 <div class="col-sm-3" style="text-align: left">
-                    <a href="index.html" class="btn btn-sm btn-outline-primary">
-                        Voltar
+                    <a href="index.html" class="btn btn-sm btn-outline-primary" style="border-radius: 0">
+                        <span class="fa fa-arrow-left"></span>
                     </a>
                 </div>
                 <div class="col-sm-6" style="text-align: center">
-                    <h1>Pedidos</h1>
+                    <h1>Gerenciar Pedidos</h1>
                 </div>
                 <div class="col-sm-3" style="text-align: right">
-                    <a href="PedidoServlet?acao=novo" class="btn btn-primary">
-                        <span class="fa fa-plus"></span>  Novo Pedido
+                    <a href="PedidoServlet?acao=novo" class="btn btn-success" style="border-radius: 0">
+                        Novo Pedido
                     </a>
                 </div>
             </div>
@@ -37,7 +37,7 @@
             <br>
            
             <table class="table">
-                <thead style="font-weight: bold">
+                <thead style="font-weight: bold; background-color: black; color: white;">
                     <tr>
                         <th>#</th>
                         <td>Data</td>

@@ -24,8 +24,8 @@
         <div style="padding: 20px 40px">
             <div class="row">
                 <div class="col-sm-3" style="text-align: left">
-                    <a href="ClienteServlet" class="btn btn-sm btn-outline-primary">
-                        Voltar
+                    <a href="ClienteServlet" class="btn btn-sm btn-outline-primary" style="border-radius: 0">
+                        <span class="fa fa-arrow-left"></span>
                     </a>
                 </div>
                 <div class="col-sm-6" style="text-align: center">
@@ -38,29 +38,36 @@
                 </div>
             </div>
 
+            <br>
+                    
             <form method="POST" action="ClienteServlet?acao=salvar">
 
-                <div class="form-group">
-                    <label>CPF</label>
-                    <input class="form-control" required name="cpf" value="${cliente.cpf}" />
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Nome</label>
+                    <div class="col-10">
+                        <input class="form-control" required name="nome" value="${cliente.nome}" />
+                    </div>
                 </div>
 
-
-                <div class="form-group">
-                    <label>Nome</label>
-                    <input class="form-control" required name="nome" value="${cliente.nome}" />
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Sobrenome</label>
+                    <div class="col-10">
+                        <input class="form-control" required name="sobrenome" value="${cliente.sobrenome}" />
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <label>Sobrenome</label>
-                    <input class="form-control" required name="sobrenome" value="${cliente.sobrenome}" />
+                    
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">CPF</label>
+                    <div class="col-10">
+                        <input class="form-control" required name="cpf" value="${cliente.cpf}" />
+                    </div>
                 </div>
 
                 <input name="id" type="hidden" value="${cliente.id}" />
                 
                 <br>
                 
-                <button class="btn btn-primary" type="submit">Salvar</button>
+                <button class="btn btn-success" style="border-radius: 0" type="submit">Salvar</button>
             </form>
         </div>
         

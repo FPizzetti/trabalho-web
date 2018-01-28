@@ -26,16 +26,16 @@
             
             <div class="row">
                 <div class="col-sm-3" style="text-align: left">
-                    <a href="index.html" class="btn btn-sm btn-outline-primary">
-                        Voltar
+                    <a href="index.html" class="btn btn-sm btn-outline-primary" style="border-radius: 0">
+                        <span class="fa fa-arrow-left"></span>
                     </a>
                 </div>
                 <div class="col-sm-6" style="text-align: center">
-                     <h1>Produtos</h1>
+                     <h1>Gerenciar Produtos</h1>
                 </div>
                 <div class="col-sm-3" style="text-align: right">
-                    <a href="produto-form.jsp" class="btn btn-primary">
-                        <span class="fa fa-plus"></span>  Novo Produto
+                    <a href="produto-form.jsp" class="btn btn-success" style="border-radius: 0">
+                        Novo Produto
                     </a>
                 </div>
             </div>
@@ -45,7 +45,7 @@
             <br>
 
             <table class="table">
-                <thead style="font-weight: bold">
+                <thead style="font-weight: bold; background-color: black; color: white;">
                     <tr>
                         <th>#</th>
                         <td>Descrição</td>
@@ -62,21 +62,19 @@
                            <td>${produto.descricao}</td>
                            <td>${produto.preco}</td>
                            <td>
-                               <a href="ProdutoServlet?action=editar&id=${produto.id}"
-                                  class="btn btn-outline-success fa fa-pencil">
+                               <a href="ProdutoServlet?action=editar&id=${produto.id}">
+                                   Editar
                                </a>
                            </td>
                            <td>
                                <a href="ProdutoServlet?action=remover&id=${produto.id}" 
-                                  onclick="return confirm('Deseja remover esse produto?');"
-                                  class="btn btn-outline-danger fa fa-trash">
+                                  onclick="return confirm('Deseja remover esse produto?');">
+                                   Excluir
                                </a>
                            </td>
                        </tr>
                     </c:forEach>
                        
-                    <c:if test="${produtos.size() == 0}">Não há nenhum produto cadastrado ainda!<br></c:if>
-
                 </tbody>
             </table>
         

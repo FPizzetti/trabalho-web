@@ -24,8 +24,8 @@
         <div style="padding: 20px 40px">
             <div class="row">
                 <div class="col-sm-3" style="text-align: left">
-                    <a href="ProdutoServlet" class="btn btn-sm btn-outline-primary">
-                        Voltar
+                    <a href="ProdutoServlet" class="btn btn-sm btn-outline-primary" style="border-radius: 0">
+                        <span class="fa fa-arrow-left"></span>
                     </a>
                 </div>
                 <div class="col-sm-6" style="text-align: center">
@@ -38,23 +38,29 @@
                 </div>
             </div>
 
+            <br>
+                    
             <form method="POST" action="ProdutoServlet?action=salvar">
                 
-                <div class="form-group">
-                    <label>Descrição</label>
-                    <input class="form-control" required name="descricao" value="${produto.descricao}" />
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Descrição</label>
+                    <div class="col-10">
+                        <input class="form-control" required name="descricao" value="${produto.descricao}" />
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label>Preço</label>
-                    <input class="form-control" required type="number" name="preco" value="${produto.preco}" />
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Preço</label>
+                    <div class="col-10">
+                        <input class="form-control" required type="number" name="preco" value="${produto.preco}" />
+                    </div>
                 </div>
                 
                 <input name="id" type="hidden" value="${produto.id}" />
                 
                 <br>
                 
-                <button class="btn btn-primary" type="submit">Salvar</button>
+                <button class="btn btn-success" style="border-radius: 0" type="submit">Salvar</button>
             </form>
             
         </div>
