@@ -19,18 +19,81 @@ and open the template in the editor.
     </head>
     <body>
         
-    <div class="container">
-        <div class="row" style="position: absolute; top: 15%; margin: 0 auto;">
-            <div class="col-xs-4">
-                <div class="card" style="width: 20rem; border: 3px solid black; border-radius: 0; padding: 5px; text-align: center; margin: 10px 2px;">
+        <div class="container py-1">
+            <div class="card">
+              <div class="row ">
+                <div class="col-md-4">
                     <a href="ClienteServlet">
-                        <img class="card-img-top" src="http://millo.co/wp-content/uploads/2011/03/happy_clients.jpg" style="width: 15rem; height: 15rem; margin: 5px auto;" alt="Clientes">
+                       <img src="http://millo.co/wp-content/uploads/2011/03/happy_clients.jpg" style="height: 10rem; margin: 5px auto;" class="w-100">
                     </a>
-                    <div class="card-block">
-                        <a href="ClienteServlet" class="btn btn-outline-secondary btn-lg" style="border-radius: 0; border-color: black; color: black; margin: 10px auto;">Gerenciar Clientes</a>
+                  </div>
+                  <div class="col-md-8 px-3" style="padding: 5px 0;">
+                    <div class="card-block px-3">
+                      <h4 class="card-title">Clientes</h4>
+                      <p class="card-text" style="color: #444444; font-size: 14px;"><i>"Do latim cliens, o termo cliente permite fazer alusão à pessoa que tem acesso a um produto ou serviço mediante pagamento. A noção tende a ser associada a quem recorrer ao produto ou serviço em questão com assiduidade, ainda que também existam os clientes ocasionais (ou pontuais)."</i></p>
+                      <a href="ClienteServlet" class="btn btn-outline-secondary btn-lg" style="border-radius: 0; border-color: black; color: black;">Gerenciar Clientes</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container py-1">
+            <div class="card">
+                <div class="row ">
+                    <div class="col-md-8 px-3" style="padding: 5px 0;">
+                        <div class="card-block px-3">
+                          <h4 class="card-title">Produtos</h4>
+                          <p class="card-text" style="color: #444444; font-size: 14px;"><i>"Do latim productus, chama-se produto àquilo que tenha sido alvo de fabrico (isto é, que tenha sido fabricado ou produzido). Esta definição do termo é bastante abrangente e permite que objectos muito diversos se englobem dentro do conceito genérico de produto."</i></p>
+                          <a href="ProdutoServlet" class="btn btn-outline-secondary btn-lg" style="border-radius: 0; border-color: black; color: black; margin: 10px auto;">Gerenciar Produtos</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="ProdutoServlet">
+                           <img src="https://www.batleys.co.uk/img/general/bestin-product-range.jpg" style="height: 10rem; margin: 5px auto;" class="w-100">
+                        </a>
                     </div>
                 </div>
             </div>
+        </div>
+        
+        <div class="container py-1">
+            <div class="card">
+              <div class="row ">
+                <div class="col-md-4">
+                    <a href="PedidoServlet">
+                       <img src="https://www.iatp.org/sites/default/files/receipt_0.jpg" style="height: 10rem; margin: 5px auto;" class="w-100">
+                    </a>
+                  </div>
+                  <div class="col-md-8 px-3" style="padding: 5px 0;">
+                    <div class="card-block px-3">
+                      <h4 class="card-title">Pedidos</h4>
+                      <p class="card-text" style="color: #444444; font-size: 14px;"><i>"O pedido de compra é um documento que formaliza quais foram os produtos, quantidades, preços e condições gerais da compra acordadas entre vendedor e cliente. Portanto, o pedido é o primeiro passo do processo de venda e também é responsável por registrar os dados da venda."</i></p>
+                      <a href="PedidoServlet" class="btn btn-outline-secondary btn-lg" style="border-radius: 0; border-color: black; color: black; margin: 10px auto;">Gerenciar Pedidos</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        
+<!--    <div class="container" style="position: absolute; top: 15%; margin: 0 auto;">
+            
+        <div class="card" style="width: 100%; border: 3px solid black; border-radius: 0; padding: 5px; text-align: center; margin: 10px 2px;">
+            <div class="row">
+               <div class="col-xs-8">
+                    <a href="ClienteServlet">
+                        <img class="card-img-top" src="http://millo.co/wp-content/uploads/2011/03/happy_clients.jpg" style="width: 25rem; height: 15rem;" alt="Clientes">
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <div class="card-block">
+                        <a href="ClienteServlet" class="btn btn-outline-secondary btn-lg" style="border-radius: 0; border-color: black; color: black;">Gerenciar Clientes</a>
+                    </div>
+                </div> 
+            </div>
+
+        </div>
+        
             <div class="col-xs-4">
                 <div class="card" style="width: 20rem; border: 3px solid black; border-radius: 0; padding: 5px; text-align: center; margin: 10px 2px;">
                     <a href="ProdutoServlet">
@@ -51,8 +114,7 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </div>-->
        
     </body>
 </html>
