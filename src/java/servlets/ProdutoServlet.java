@@ -6,7 +6,6 @@
 package servlets;
 
 import daos.produto.ProdutoDao;
-import daos.produto.ProdutoDaoImpl;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -23,24 +22,10 @@ import models.Produto;
 @WebServlet(name = "ProdutoServlet", urlPatterns = {"/ProdutoServlet"})
 public class ProdutoServlet extends HttpServlet {
 
-    public ProdutoDao produtoDao;
-
+    public ProdutoDao produtoDao = new ProdutoDao();
     public Produto produto;
 
-    public ProdutoServlet() {
-        produtoDao = new ProdutoDaoImpl();
-    }
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processSaveRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void salvarProduto(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = 0;
         try {
@@ -58,15 +43,13 @@ public class ProdutoServlet extends HttpServlet {
         } else {
             produtoDao.criar(produto);
         }
-        redirectProducts(request, response);
+        List<Produto> produtos = produtoDao.listar();
+        request.setAttribute("produtos", produtos);
+        request.getRequestDispatcher("/produtos.jsp").forward(request,
+                response);
     }
 
-    protected void processListRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        redirectProducts(request, response);
-    }
-
-    protected void processEditRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void editarProduto(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Produto p = produtoDao.consultarPorId(id);
@@ -75,43 +58,51 @@ public class ProdutoServlet extends HttpServlet {
             request.getRequestDispatcher("/produto-form.jsp").forward(request,
                     response);
         } else {
-            redirectProducts(request, response);
+            List<Produto> produtos = produtoDao.listar();
+            request.setAttribute("produtos", produtos);
+            request.getRequestDispatcher("/produtos.jsp").forward(request,
+                    response);
         }
     }
 
-    protected void processRemoveRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void removerProduto(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         if (id > 0) {
             try {
                 produtoDao.removerPorId(id);
-                redirectProducts(request, response);
+                List<Produto> produtos = produtoDao.listar();
+                request.setAttribute("produtos", produtos);
+                request.getRequestDispatcher("/produtos.jsp").forward(request,
+                        response);
             } catch (Exception e) {
                 request.setAttribute("erro", "Não foi possível remover este produto");
-                redirectProducts(request, response);
+                List<Produto> produtos = produtoDao.listar();
+                request.setAttribute("produtos", produtos);
+                request.getRequestDispatcher("/produtos.jsp").forward(request,
+                        response);
             }
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
-        if (action != null && action.equals("remover")) {
-            processRemoveRequest(request, response);
-        } else if (action != null && action.equals("editar")) {
-            processEditRequest(request, response);
+
+        //Verificar qual o tipo de operação a ser feita
+        if (request.getParameter("action") != null
+                && request.getParameter("action").equals("editar")) {
+            editarProduto(request, response);
+        } else if (request.getParameter("action") != null
+                && request.getParameter("action").equals("remover")) {
+            removerProduto(request, response);
+
         } else {
-            processListRequest(request, response);
+            //listar produtos
+            List<Produto> produtos = produtoDao.listar();
+            request.setAttribute("produtos", produtos);
+            request.getRequestDispatcher("/produtos.jsp").forward(request,
+                    response);
         }
     }
 
@@ -128,7 +119,7 @@ public class ProdutoServlet extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action.equals("salvar")) {
-            processSaveRequest(request, response);
+            salvarProduto(request, response);
         }
     }
 
@@ -141,13 +132,5 @@ public class ProdutoServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private void redirectProducts(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        List<Produto> produtos = produtoDao.listar();
-        request.setAttribute("produtos", produtos);
-        request.getRequestDispatcher("/produtos.jsp").forward(request,
-                response);
-    }
 
 }
