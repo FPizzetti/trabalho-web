@@ -51,13 +51,18 @@ public class ClienteServlet extends HttpServlet {
                 String sobrenome = request.getParameter("sobrenome");
 
                 cliente = new Cliente(id, cpf, nome, sobrenome);
-
-                if (id != 0) {
-                    clienteDao.atualizar(cliente);
-                } else {
-                    clienteDao.criar(cliente);
+                    
+                try {
+                    if (id != 0) {
+                        clienteDao.atualizar(cliente);
+                    } else {
+                        clienteDao.criar(cliente);
+                    }
+                    redirectClientes(request, response);
+                } catch (Exception e) {
+                    request.setAttribute("erro", "Não foi possível gravar este cliente");
+                    redirectClientesCadastro(request, response);
                 }
-                redirectClientes(request, response);
             }
             else if (acao.equals("remover")){
                 String cpf = request.getParameter("cpf");
@@ -89,6 +94,11 @@ public class ClienteServlet extends HttpServlet {
         List<Cliente> clientes = clienteDao.listar();
         request.setAttribute("clientes", clientes);
         request.getRequestDispatcher("/clientes.jsp").forward(request, response);
+    }
+    
+    private void redirectClientesCadastro(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("/cliente-form.jsp").forward(request, response);
     }
     
     

@@ -38,6 +38,8 @@
                 </div>
             </div>
 
+            <h4 style="color:red">${erro}</h4>
+                    
             <form method="POST" action="ClienteServlet?acao=salvar">
 
                 <div class="form-group">
