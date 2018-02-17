@@ -88,7 +88,7 @@ public class PedidoServlet extends HttpServlet {
                 request.setAttribute("clientes", clientes);
                 request.setAttribute("produtos", produtos);
                 
-                if (!request.getParameter("gravado").equals(null))
+                if (request.getParameter("gravado") != null)
                     request.setAttribute("gravado", request.getParameter("gravado"));
 
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/pedido-novo.jsp");
