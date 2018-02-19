@@ -5,8 +5,12 @@
  */
 package servlets;
 
+import daos.cliente.ClienteDao;
+import daos.cliente.ClienteDaoImpl;
 import daos.pedido.PedidoDao;
 import daos.pedido.PedidoDaoImpl;
+import daos.produto.ProdutoDao;
+import daos.produto.ProdutoDaoImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -16,8 +20,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.Cliente;
 import models.ItemPedido;
 import models.Pedido;
+import models.Produto;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -41,40 +49,74 @@ public class PedidoServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             PedidoDao pedidoDao = new PedidoDaoImpl();
+            ProdutoDao produtoDao = new ProdutoDaoImpl();
             Pedido pedido = new Pedido();
-            
+            ClienteDao clienteDao = new ClienteDaoImpl();
+
             String acao = request.getParameter("acao");
 
             if (acao == null) {
-                
+
                 List<Pedido> pedidos = pedidoDao.listarPedidos("");
-                
+
                 request.setAttribute("pedidos", pedidos);
-                
+
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/pedidos.jsp");
                 rd.forward(request, response);
-            }
-            else if (acao.equals("visualizar")) {
-                
+            } else if (acao.equals("visualizar")) {
+
                 int id = Integer.parseInt(request.getParameter("id"));
-                
+
                 float total = 0;
-                
+
                 List<ItemPedido> itens = pedidoDao.listarItens(id);
-                
+
                 for (ItemPedido element : itens) {
                     total += element.getProduto().getPreco() * element.getQuantidade();
                 }
 
                 request.setAttribute("itens", itens);
                 request.setAttribute("total", total);
-                
+
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/pedido-detalhes.jsp");
                 rd.forward(request, response);
-            } 
-            else if (acao.equals("novo")) {
+            } else if (acao.equals("novo")) {
+
+                List<Cliente> clientes = clienteDao.listar();
+                List<Produto> produtos = produtoDao.listar();
+
+                request.setAttribute("clientes", clientes);
+                request.setAttribute("produtos", produtos);
                 
+                if (request.getParameter("gravado") != null)
+                    request.setAttribute("gravado", request.getParameter("gravado"));
+
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/pedido-novo.jsp");
+                rd.forward(request, response);
                 
+            } else if (acao.equals("gravar")) {
+                
+                String result;
+                String jsonData = request.getParameter("items");
+                JSONObject jsonObject = new JSONObject(jsonData);
+                JSONArray jsonArray = jsonObject.getJSONArray("itens");
+
+                Cliente c = clienteDao.consultarPorId(jsonObject.getInt("cliente"));
+
+                if (c != null) {
+                    
+                    pedido.setCliente(c);
+                    pedidoDao.criar(pedido);
+ 
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject produtoJson = jsonArray.getJSONObject(i);
+                        
+                        Produto produto = produtoDao.consultarPorId(produtoJson.getInt("id"));
+                        ItemPedido item = new ItemPedido(pedido, produto, produtoJson.getInt("quantidade"));
+                        pedidoDao.adicionarItem(item);
+                    }
+
+                } 
             }
         }
     }
