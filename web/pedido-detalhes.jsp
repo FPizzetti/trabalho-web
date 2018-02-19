@@ -19,8 +19,8 @@
         
         <div class="row">
             <div class="col-sm-3" style="text-align: left">
-                <a href="PedidoServlet" class="btn btn-sm btn-outline-primary">
-                    Voltar
+                <a href="PedidoServlet" class="btn btn-sm btn-outline-primary" style="border-radius: 0">
+                    <span class="fa fa-arrow-left"></span>
                 </a>
             </div>
             <div class="col-sm-6" style="text-align: center">
@@ -33,7 +33,7 @@
         <br>
        
         <table class="table">
-            <thead style="font-weight: bold">
+            <thead style="font-weight: bold; background-color: black; color: white;">
                 <tr>
                     <td>Produto</td>
                     <td>Quantidade</td>
@@ -55,6 +55,8 @@
         
         <br>
         
-        <span style="font-size: 20px"><strong>Total do pedido:</strong> R$ ${total}</span>
+        <strong>Total do pedido:</strong> 
+        <br>
+        R$ ${total}
     </body>
 </html>

@@ -12,7 +12,7 @@ $("#add").click(function() {
                 '<td>' + qtd + '</td>' +
                 '<td>' + parseFloat(item.data('preco')).toFixed(2) + '</td>' +
                 '<td data-total>' + parseFloat(total).toFixed(2) + '</td>' +
-                '<td><button class="remove btn btn-danger">X</button></td>' +
+                '<td><button class="remove btn btn-outline-danger">Deletar</button></td>' +
                 '</tr>'
             );
     
